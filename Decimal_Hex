@@ -1,0 +1,37 @@
+public class Solution {
+    private static final String HEX = "0123456789abcdef";
+
+    public static void main(String[] args) {
+        int decimalNumber = 1256;
+        System.out.println("Десятичное число " + decimalNumber + " равно шестнадцатеричному числу " + toHex(decimalNumber));
+        String hexNumber = "4e8";
+        System.out.println("Шестнадцатеричное число " + hexNumber + " равно десятичному числу " + toDecimal(hexNumber));
+    }
+
+    public static String toHex(int decimalNumber) {
+        StringBuilder hexNumber = new StringBuilder();
+        if(decimalNumber <= 0)
+            return hexNumber.toString();
+
+        while(decimalNumber != 0){
+            //добавляем в строку hexNumber символ из статической переменной НЕХ под индексом (decimalNumber % 16)
+            hexNumber.append(HEX.charAt(decimalNumber % 16));
+            decimalNumber /= 16;
+        }
+        hexNumber = hexNumber.reverse();
+        return hexNumber.toString();
+    }
+
+    public static int toDecimal(String hexNumber) {
+        int decimalNumber = 0;
+        if(hexNumber == null || hexNumber.isEmpty())
+            return decimalNumber;
+
+        for(int i=0, length=hexNumber.length(); i<length; i++){
+            //index - значение текущего символа (0-f) в 10-чной системе
+            int index = HEX.indexOf(hexNumber.charAt(i));
+            decimalNumber += index * Math.pow(16, (length - i - 1));
+        }
+        return decimalNumber;
+    }
+}
