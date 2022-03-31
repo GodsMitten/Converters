@@ -1,0 +1,82 @@
+public class Solution {
+
+    public static void main(String[] args) {
+        String binaryNumber = "100111010000";
+        System.out.println("Двоичное число " + binaryNumber + " равно шестнадцатеричному числу " + toHex(binaryNumber));
+        String hexNumber = "9d0";
+        System.out.println("Шестнадцатеричное число " + hexNumber + " равно двоичному числу " + toBinary(hexNumber));
+    }
+
+    public static String toHex(String binaryNumber) {
+        StringBuilder hexNumber = new StringBuilder();;
+        if(binaryNumber == null || binaryNumber.isEmpty())
+            return hexNumber.toString();
+
+        //NOT the best name for its purpose but I don't wanna
+        //use if-else(binaryNumber.length() %= 4 == 1/2/3)
+        int length = binaryNumber.length() %= 4;
+        switch(length){
+            case 1:
+                hexNumber.append("000").append(binaryNumber); break;
+            case 2:
+                hexNumber.append("00").append(binaryNumber); break;
+            case 3:
+                hexNumber.append("0").append(binaryNumber); break;
+        }
+
+        length = hexNumber.length();
+        for (int i = 0; i < length; i += 4) {
+            String substring = binaryNumber.substring(i, i + 4);
+            switch(substring){
+                case "0000": hexNumber.append("0"); break;
+                case "0001": hexNumber.append("1"); break;
+                case "0010": hexNumber.append("2"); break;
+                case "0011": hexNumber.append("3"); break;
+                case "0100": hexNumber.append("4"); break;
+                case "0101": hexNumber.append("5"); break;
+                case "0110": hexNumber.append("6"); break;
+                case "0111": hexNumber.append("7"); break;
+                case "1000": hexNumber.append("8"); break;
+                case "1001": hexNumber.append("9"); break;
+                case "1010": hexNumber.append("a"); break;
+                case "1011": hexNumber.append("b"); break;
+                case "1100": hexNumber.append("c"); break;
+                case "1101": hexNumber.append("d"); break;
+                case "1110": hexNumber.append("e"); break;
+                case "1111": hexNumber.append("f"); break;
+                default: result.setLength(0); return hexNumber.toString();
+            }
+        }
+        return hexNumber.toString();
+    }
+
+    public static String toBinary(String hexNumber) {
+        StringBuilder binaryNumber = new StringBuilder();
+
+        if(hexNumber == null || hexNumber.isEmpty())
+            return binaryNumber.toString;
+
+        for(int length=hexNumber.length(), i=0; i<length; i++){
+            switch (hexNumber.charAt(i)){
+                case '0': binaryNumber.append("0000"); break;
+                case '1': binaryNumber.append("0001"); break;
+                case '2': binaryNumber.append("0010"); break;
+                case '3': binaryNumber.append("0011"); break;
+                case '4': binaryNumber.append("0100"); break;
+                case '5': binaryNumber.append("0101"); break;
+                case '6': binaryNumber.append("0110"); break;
+                case '7': binaryNumber.append("0111"); break;
+                case '8': binaryNumber.append("1000"); break;
+                case '9': binaryNumber.append("1001"); break;
+                case 'a': binaryNumber.append("1010"); break;
+                case 'b': binaryNumber.append("1011"); break;
+                case 'c': binaryNumber.append("1100"); break;
+                case 'd': binaryNumber.append("1101"); break;
+                case 'e': binaryNumber.append("1110"); break;
+                case 'f': binaryNumber.append("1111"); break;
+                default: return "";
+            }
+        }
+        return binaryNumber.toString();
+    }
+}
